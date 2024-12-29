@@ -7,6 +7,8 @@ import { FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 type Equipment = {
     id: string;
@@ -105,6 +107,7 @@ const MaintenanceEditForm = ({ params }: { params: Promise<{ id: string }> }) =>
           reset(formData);
       }
   }, [maintenanceRecord, reset]);
+  const router = useRouter();
   const onSubmit = async (data: MaintenanceRecordFormData) => {
     try {
         // Transform back to API expected format if needed
@@ -114,7 +117,8 @@ const MaintenanceEditForm = ({ params }: { params: Promise<{ id: string }> }) =>
         };
         const response = await updateMaintenanceRecord(id, submissionData);
         if (response.success) {
-            alert("Maintenance Record updated successfully!");
+            toast.success("Maintenance Record updated successfully!");
+            router.push("/dashboard/maintenance");
         } else {
             throw new Error(response.message);
         }

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { equipmentSchema } from "../utils/validationSchema";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 type FormData = {
     name: string;
@@ -37,6 +38,7 @@ const EquipmentForm = () => {
             status: "Operational",
         },
     });
+    const router = useRouter();
 
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
@@ -48,9 +50,9 @@ const EquipmentForm = () => {
             const response = await axios.post("/api/equipment", formData);
             if (response.data.success) {
                 toast.success(response.data.message);
-
+                router.push("/dashboard/equipment");
             }
-            // alert("Equipment added successfully!");
+            
             reset();
         } catch (error) {
             console.log(error)
@@ -58,6 +60,7 @@ const EquipmentForm = () => {
         } finally {
             setIsSubmitting(false);
         }
+
     };
 
     return (

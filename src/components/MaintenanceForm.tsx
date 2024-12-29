@@ -7,6 +7,8 @@ import { FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type Equipment = {
     id: string;
@@ -31,6 +33,7 @@ const fetchEquipment = async (): Promise<Equipment[]> => {
 };
 
 const MaintenanceForm = () => {
+    const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { data: equipment, isLoading: isLoadingEquipment } = useQuery({
@@ -80,7 +83,8 @@ const MaintenanceForm = () => {
             });
 
             if (response.data.success) {
-                alert("Maintenance Record added successfully!");
+                toast.success("Maintenance Record added successfully!");
+                    router.push("/dashboard/maintenance");
                 // reset();
             } else {
                 throw new Error(response.data.message);

@@ -21,8 +21,10 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
     return NextResponse.json({ message: error, success: false, data: null });
   }
 }
-
-export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+interface Params2  {
+  id: string;
+}
+export async function DELETE(req: NextRequest, { params }: { params: Params2 }) {
   try {
     const { id } = await params;
     const equipment = await prisma.equipment.delete({ where: { id: id } });
@@ -38,9 +40,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Params }) {
 }
 
 
-interface Params {
-  id: string;
-}
 
 export async function PUT(req: NextRequest, { params }: { params: Params }) {
   try {

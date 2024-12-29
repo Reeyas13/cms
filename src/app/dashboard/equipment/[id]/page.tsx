@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import { toast } from "react-toastify";
 import { format } from 'date-fns';
+import { useRouter } from "next/navigation";
 
 type FormData = {
     name: string;
@@ -68,13 +69,14 @@ const EquipmentEditForm = ({ params }: { params: Promise<{ id: string }> }) => {
             });
         }
     }, [equipment, reset]);
-
+const router = useRouter();
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
         try {
             const response = await axios.put(`/api/equipment/${id}`, data);
             if (response.data.success) {
                 toast.success("Equipment updated successfully!");
+                router.push("/dashboard/equipment");
             }
         } catch (error) {
             console.error(error);
