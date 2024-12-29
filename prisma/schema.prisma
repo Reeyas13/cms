@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root@localhost:3306/cms"
+}
+
+enum Department {
+  Machining
+  Assembly
+  Packaging
+  Shipping
+}
+
+enum Status {
+  Operational
+  Down
+  Maintenance
+  Retired
+}
+
+enum MaintenanceType {
+  Preventive
+  Repair
+  Emergency
+}
+
+enum Priority {
+  Low
+  Medium
+  High
+}
+
+enum CompletionStatus {
+  Complete
+  Incomplete
+  PendingParts
+}
+
+model Equipment {
+  id                 String              @id @default(cuid())
+  name               String
+  location           String
+  department         Department
+  model              String
+  serialNumber       String
+  installDate        DateTime
+  status             Status
+  createdAt          DateTime            @default(now()) // Optional
+  updatedAt          DateTime?            @updatedAt // Optional
+  MaintenanceRecords MaintenanceRecord[]
+}
+
+model MaintenanceRecord {
+  id               String           @id @default(cuid())
+  equipmentId      String
+  date             DateTime
+  type             MaintenanceType
+  technician       String
+  hoursSpent       Int
+  description      String
+  priority         Priority
+  completionStatus CompletionStatus
+  Equipment        Equipment        @relation(fields: [equipmentId], references: [id])
+  PartsReplaced    PartsReplaced[]
+}
+
+model PartsReplaced {
+  id            String @id @default(cuid())
+  maintenanceId String
+  name          String
+
+  MaintenanceRecord MaintenanceRecord @relation(fields: [maintenanceId], references: [id])
+}
