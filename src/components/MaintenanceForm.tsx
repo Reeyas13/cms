@@ -38,7 +38,7 @@ const MaintenanceForm = () => {
         queryFn: fetchEquipment,
     });
 
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<MaintenanceRecordFormData>({
+    const { control, handleSubmit, formState: { errors } } = useForm<MaintenanceRecordFormData>({
         resolver: zodResolver(MaintenanceRecordSchema),
         defaultValues: {
             equipmentId: "",

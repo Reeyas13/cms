@@ -2,10 +2,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "mysql"
+//   url      = "mysql://root@localhost:3306/cms"
+// }
+
 datasource db {
-  provider = "mysql"
-  url      = "mysql://root@localhost:3306/cms"
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
 }
+
 
 enum Department {
   Machining

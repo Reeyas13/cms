@@ -35,6 +35,8 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
       data: transformedData,
     });
   } catch (error) {
+    console.error("Error updating maintenance record:", error);
+
     return NextResponse.json({ message: "error", success: false, data: null });
   }
 }
@@ -50,6 +52,8 @@ export async function DELETE(req: NextRequest, { params }: { params: Params }) {
       data: maintenanceRecord,
     });
   } catch (error) {
+    console.error("Error updating maintenance record:", error);
+
     return NextResponse.json({ message: "error", success: false, data: null });
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SdieBar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

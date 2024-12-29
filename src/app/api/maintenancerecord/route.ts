@@ -109,7 +109,7 @@ export async function POST(req: Request) {
       );
     }
     if (!partsReplaced) {
-      const newRecord = await prisma.maintenanceRecord.create({
+    await prisma.maintenanceRecord.create({
         data: {
           equipmentId: equipmentId.toString(),
           date: new Date(date.toString()),
@@ -122,7 +122,7 @@ export async function POST(req: Request) {
         },
       });
     }else {
-        const newRecord = await prisma.maintenanceRecord.create({
+         await prisma.maintenanceRecord.create({
           data: {
             equipmentId: equipmentId.toString(),
             date: new Date(date.toString()),

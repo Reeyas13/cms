@@ -32,6 +32,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Params }) {
       data: equipment,
     });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ message: error, success: false, data: null });
   }
 }

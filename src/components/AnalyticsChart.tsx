@@ -12,7 +12,7 @@ import {
   Legend
 } from 'recharts';
 
-// Define interfaces for the data structure
+
 interface MaintenanceData {
   month: string;
   total: number;
@@ -43,6 +43,7 @@ const AnalyticsChart: React.FC = () => {
         setData(response.data.data[0]); // Getting the first month's data
         setLoading(false);
       } catch (err) {
+        console.log(err)
         setError('Failed to fetch analytics data');
         setLoading(false);
       }

@@ -108,6 +108,7 @@ const EquipmentTable = () => {
                 refetch(); // Refetch data after deletion
             }
         } catch (error) {
+            console.log(error)
             toast.error("Error deleting equipment, delete related items first");
         }
     };
